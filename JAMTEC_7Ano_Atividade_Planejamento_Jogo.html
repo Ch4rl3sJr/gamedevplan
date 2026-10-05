@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JAMTEC — Planejamento do Jogo Digital</title>
+<style>
+:root{
+  --bg:#f4f6fb; --card:#ffffff; --ink:#1f2937; --muted:#64748b;
+  --primary:#6d28d9; --primary2:#8b5cf6; --accent:#f97316;
+  --line:#dbe3ee; --good:#15803d; --soft:#ede9fe;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#f8fafc,#eef2ff);color:var(--ink)}
+header{background:linear-gradient(120deg,var(--primary),#4338ca);color:white;padding:28px 18px}
+.wrap{max-width:980px;margin:auto}
+header h1{margin:0 0 6px;font-size:clamp(26px,5vw,42px)}
+header p{margin:0;opacity:.92}
+main{padding:22px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin:0 0 18px;box-shadow:0 8px 28px rgba(30,41,59,.07)}
+.badge{display:inline-block;background:var(--soft);color:var(--primary);font-weight:700;padding:6px 10px;border-radius:999px;font-size:13px}
+h2{margin:10px 0 8px;font-size:22px}
+h3{margin:18px 0 8px;font-size:16px}
+.note{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+input,textarea,select{
+ width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:11px 12px;
+ font:inherit;background:white;color:var(--ink);outline:none
+}
+input:focus,textarea:focus,select:focus{border-color:var(--primary2);box-shadow:0 0 0 3px rgba(139,92,246,.15)}
+textarea{min-height:90px;resize:vertical}
+.full{grid-column:1/-1}
+.options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.choice{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fafafa}
+.choice input{width:auto;margin-right:6px}
+.counter{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;position:sticky;bottom:12px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid var(--line);padding:12px;border-radius:16px;box-shadow:0 8px 30px rgba(15,23,42,.12)}
+button,.filebtn{border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;font:inherit}
+.primary{background:var(--primary);color:white}
+.secondary{background:#e2e8f0;color:#0f172a}
+.accent{background:var(--accent);color:white}
+.success{background:var(--good);color:white}
+.filebtn{display:inline-flex;align-items:center;background:#0f172a;color:white}
+.filebtn input{display:none}
+.preview{background:#fafafa;border:1px dashed #cbd5e1;border-radius:14px;padding:15px;white-space:pre-wrap}
+.progress{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.progress > div{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:.2s}
+footer{text-align:center;color:var(--muted);font-size:13px;padding-top:10px}
+@media(max-width:700px){.grid,.options{grid-template-columns:1fr}.full{grid-column:auto}}
+@media print{
+ body{background:white}
+ header{background:white!important;color:black;padding:0 0 14px;border-bottom:2px solid #222}
+ main{padding:10px 0}
+ .wrap{max-width:none}
+ .actions,.note.screen-only,.progress-wrap{display:none!important}
+ .card{box-shadow:none;break-inside:avoid;border:1px solid #aaa}
+ input,textarea,select{border:none;padding:0;background:transparent}
+ textarea{min-height:50px}
+ .choice{border:none;padding:2px 0;background:transparent}
+ @page{size:A4;margin:14mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+   <div class="badge">JAMTEC • 7º ANO • 4º BIMESTRE</div>
+   <h1>Planejamento do Jogo Digital</h1>
+   <p>Transforme sua ideia em um plano claro antes de começar a desenvolver.</p>
+ </div>
+</header>
+
+<main class="wrap">
+ <div class="card progress-wrap">
+   <strong>Progresso do planejamento</strong>
+   <div class="progress" style="margin-top:10px"><div id="bar"></div></div>
+   <div class="note" id="progressText">0% preenchido</div>
+ </div>
+
+ <section class="card">
+   <span class="badge">1. Identificação</span>
+   <div class="grid" style="margin-top:14px">
+     <div><label>Nome do aluno</label><input data-field="aluno" placeholder="Digite seu nome"></div>
+     <div><label>Turma</label><input data-field="turma" placeholder="Ex.: 7º A"></div>
+     <div class="full"><label>Nome provisório do jogo</label><input data-field="titulo" placeholder="Ex.: Star Explorer"></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">2. Conceito do jogo</span>
+   <h2>Qual é a sua ideia?</h2>
+   <div class="grid">
+     <div>
+       <label>Gênero principal</label>
+       <select data-field="genero">
+         <option value="">Selecione...</option>
+         <option>Aventura Top-Down</option><option>Plataforma</option><option>Puzzle</option>
+         <option>Corrida</option><option>Arcade</option><option>Outro</option>
+       </select>
+     </div>
+     <div>
+       <label>Tema / ambiente</label>
+       <input data-field="tema" placeholder="Floresta, espaço, cidade futurista...">
+     </div>
+     <div class="full">
+       <label>Resuma o jogo em uma frase</label>
+       <textarea data-field="resumo" maxlength="300" placeholder="Ex.: Um robô explora uma estação espacial para recuperar três baterias e voltar à nave."></textarea>
+       <div class="counter"><span data-count="resumo">0</span>/300</div>
+     </div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">3. Personagem</span>
+   <div class="grid" style="margin-top:14px">
+     <div><label>Nome do personagem</label><input data-field="personagem"></div>
+     <div><label>Quem ou o que ele é?</label><input data-field="tipo_personagem" placeholder="Explorador, robô, criatura..."></div>
+     <div><label>Habilidade principal</label><input data-field="habilidade" placeholder="Correr, abrir portas, usar dash..."></div>
+     <div><label>Limitação</label><input data-field="limitacao" placeholder="Ex.: não atravessa áreas com energia"></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">4. Objetivo e desafio</span>
+   <div class="grid" style="margin-top:14px">
+     <div class="full">
+       <label>O que o jogador precisa fazer para vencer?</label>
+       <textarea data-field="objetivo" maxlength="400"></textarea>
+       <div class="counter"><span data-count="objetivo">0</span>/400</div>
+     </div>
+     <div class="full">
+       <label>Qual será o principal desafio?</label>
+       <textarea data-field="desafio" maxlength="400" placeholder="Inimigos, labirintos, portas, tempo, obstáculos..."></textarea>
+       <div class="counter"><span data-count="desafio">0</span>/400</div>
+     </div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">5. Mecânicas</span>
+   <h2>O que o jogador poderá fazer?</h2>
+   <div class="options" data-field-group="mecanicas">
+     <label class="choice"><input type="checkbox" value="Mover">Mover</label>
+     <label class="choice"><input type="checkbox" value="Coletar itens">Coletar itens</label>
+     <label class="choice"><input type="checkbox" value="Abrir portas">Abrir portas</label>
+     <label class="choice"><input type="checkbox" value="Conversar">Conversar</label>
+     <label class="choice"><input type="checkbox" value="Desviar">Desviar</label>
+     <label class="choice"><input type="checkbox" value="Ativar mecanismos">Ativar mecanismos</label>
+   </div>
+   <h3>Outra mecânica</h3>
+   <input data-field="mecanica_extra" placeholder="Descreva uma mecânica diferente">
+ </section>
+
+ <section class="card">
+   <span class="badge">6. Elementos do jogo</span>
+   <div class="grid" style="margin-top:14px">
+     <div><label>Item importante</label><input data-field="item" placeholder="Chave, cristal, bateria..."></div>
+     <div><label>Obstáculo ou inimigo</label><input data-field="obstaculo"></div>
+     <div><label>Como o jogador recebe feedback?</label><input data-field="feedback" placeholder="Som, animação, mensagem, pontos..."></div>
+     <div><label>Como o jogador perde ou falha?</label><input data-field="derrota"></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">7. Estrutura da fase</span>
+   <h2>Planeje o caminho do jogador</h2>
+   <div class="grid">
+     <div><label>Começo</label><textarea data-field="inicio" placeholder="Onde o jogador começa?"></textarea></div>
+     <div><label>Meio</label><textarea data-field="meio" placeholder="Que desafio aparece?"></textarea></div>
+     <div><label>Final</label><textarea data-field="final" placeholder="Como chega ao objetivo?"></textarea></div>
+     <div><label>Condição de vitória</label><textarea data-field="vitoria"></textarea></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">8. Escopo</span>
+   <h2>Seu jogo cabe no tempo do bimestre?</h2>
+   <div class="grid">
+     <div>
+       <label>Quantidade de fases</label>
+       <select data-field="fases"><option value="">Selecione...</option><option>1</option><option>2</option><option>3</option></select>
+     </div>
+     <div>
+       <label>Quantidade de tipos de inimigo</label>
+       <select data-field="inimigos"><option value="">Selecione...</option><option>0</option><option>1</option><option>2</option><option>3</option></select>
+     </div>
+     <div class="full">
+       <label>O que você pode retirar para simplificar o projeto?</label>
+       <textarea data-field="simplificar"></textarea>
+     </div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">9. Revisão</span>
+   <h2>Checklist antes de desenvolver</h2>
+   <div class="options" data-field-group="checklist">
+     <label class="choice"><input type="checkbox" value="Objetivo claro">Objetivo claro</label>
+     <label class="choice"><input type="checkbox" value="Desafio definido">Desafio definido</label>
+     <label class="choice"><input type="checkbox" value="Personagem definido">Personagem definido</label>
+     <label class="choice"><input type="checkbox" value="Vitória definida">Vitória definida</label>
+     <label class="choice"><input type="checkbox" value="Escopo pequeno">Escopo pequeno</label>
+     <label class="choice"><input type="checkbox" value="Ideia explicável">Consigo explicar em 1 frase</label>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">Resumo automático</span>
+   <h2>Visão geral do projeto</h2>
+   <div id="preview" class="preview">Preencha os campos acima para gerar o resumo.</div>
+ </section>
+
+ <div class="actions">
+   <button class="primary" onclick="saveLocal()">Salvar no navegador</button>
+   <button class="secondary" onclick="loadLocal()">Carregar salvo</button>
+   <button class="accent" onclick="exportJSON()">Exportar JSON</button>
+   <label class="filebtn">Importar JSON<input id="importFile" type="file" accept=".json,application/json"></label>
+   <button class="success" onclick="window.print()">Exportar / Imprimir PDF</button>
+   <button class="secondary" onclick="clearForm()">Limpar</button>
+ </div>
+
+ <p class="note screen-only">Para gerar PDF, clique em <strong>Exportar / Imprimir PDF</strong> e escolha “Salvar como PDF” na janela de impressão do navegador. O arquivo JSON permite continuar editando depois.</p>
+ <footer>JAMTEC • Cultura Digital • Planejamento de Jogo Digital</footer>
+</main>
+
+<script>
+const fields=[...document.querySelectorAll('[data-field]')];
+const groups=[...document.querySelectorAll('[data-field-group]')];
+
+function getData(){
+  const data={version:1,exportedAt:new Date().toISOString()};
+  fields.forEach(el=>data[el.dataset.field]=el.value);
+  groups.forEach(g=>{
+    data[g.dataset.fieldGroup]=[...g.querySelectorAll('input:checked')].map(x=>x.value);
+  });
+  return data;
+}
+function setData(data){
+  fields.forEach(el=>{ if(data[el.dataset.field]!==undefined) el.value=data[el.dataset.field]||''; });
+  groups.forEach(g=>{
+    const vals=data[g.dataset.fieldGroup]||[];
+    g.querySelectorAll('input').forEach(x=>x.checked=vals.includes(x.value));
+  });
+  updateAll();
+}
+function updateAll(){
+  document.querySelectorAll('[data-count]').forEach(s=>{
+    const f=document.querySelector(`[data-field="${s.dataset.count}"]`);
+    s.textContent=f?f.value.length:0;
+  });
+  const filled=fields.filter(x=>x.value.trim()).length;
+  const pct=Math.round((filled/fields.length)*100);
+  document.getElementById('bar').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'% preenchido';
+  const d=getData();
+  const mec=(d.mecanicas||[]).concat(d.mecanica_extra?[d.mecanica_extra]:[]).join(', ')||'—';
+  document.getElementById('preview').textContent =
+`JOGO: ${d.titulo||'—'}
+ALUNO: ${d.aluno||'—'} | TURMA: ${d.turma||'—'}
+GÊNERO: ${d.genero||'—'}
+TEMA: ${d.tema||'—'}
+
+CONCEITO:
+${d.resumo||'—'}
+
+PERSONAGEM:
+${d.personagem||'—'} — ${d.tipo_personagem||'—'}
+Habilidade: ${d.habilidade||'—'}
+
+OBJETIVO:
+${d.objetivo||'—'}
+
+DESAFIO:
+${d.desafio||'—'}
+
+MECÂNICAS:
+${mec}
+
+ITEM IMPORTANTE: ${d.item||'—'}
+OBSTÁCULO/INIMIGO: ${d.obstaculo||'—'}
+VITÓRIA: ${d.vitoria||'—'}
+DERROTA/FALHA: ${d.derrota||'—'}`;
+}
+function saveLocal(){
+  localStorage.setItem('jamtec_gameplan',JSON.stringify(getData()));
+  alert('Planejamento salvo neste navegador.');
+}
+function loadLocal(){
+  const raw=localStorage.getItem('jamtec_gameplan');
+  if(!raw) return alert('Nenhum planejamento salvo neste navegador.');
+  setData(JSON.parse(raw));
+}
+function exportJSON(){
+  const d=getData();
+  const safe=(d.titulo||'planejamento-jogo').replace(/[^A-Za-z0-9_-]+/g,'_');
+  const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=safe+'.json';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+document.getElementById('importFile').addEventListener('change',e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=()=>{try{setData(JSON.parse(r.result));alert('Planejamento importado com sucesso.')}catch(err){alert('Arquivo JSON inválido.')}};
+  r.readAsText(file);
+});
+function clearForm(){
+  if(!confirm('Limpar todos os campos?')) return;
+  fields.forEach(x=>x.value='');
+  groups.forEach(g=>g.querySelectorAll('input').forEach(x=>x.checked=false));
+  updateAll();
+}
+document.addEventListener('input',updateAll);
+document.addEventListener('change',updateAll);
+updateAll();
+</script>
+</body>
+</html>
