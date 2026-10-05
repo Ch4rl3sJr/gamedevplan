@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JAMTEC — Planejamento do Jogo Digital</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+ <div class="wrap">
+   <div class="badge">JAMTEC • CULTURA DIGITAL</div>
+   <h1>Planejamento do Jogo Digital</h1>
+   <p>Transforme sua ideia em um plano claro antes de começar a desenvolver.</p>
+ </div>
+</header>
+
+<main class="wrap">
+ <div class="card progress-wrap">
+   <strong>Progresso do planejamento</strong>
+   <div class="progress" style="margin-top:10px"><div id="bar"></div></div>
+   <div class="note" id="progressText">0% preenchido</div>
+ </div>
+
+ <section class="card">
+   <span class="badge">1. Identificação</span>
+   <div class="grid" style="margin-top:14px">
+     <div><label>Nome do aluno</label><input data-field="aluno" placeholder="Digite seu nome"></div>
+     <div><label>Turma</label><input data-field="turma" placeholder="Ex.: 7º A"></div>
+     <div class="full"><label>Nome provisório do jogo</label><input data-field="titulo" placeholder="Ex.: Star Explorer"></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">2. Conceito do jogo</span>
+   <h2>Qual é a sua ideia?</h2>
+   <div class="grid">
+     <div>
+       <label>Gênero principal</label>
+       <select data-field="genero">
+         <option value="">Selecione...</option>
+         <option>Aventura Top-Down</option><option>Plataforma</option><option>Puzzle</option>
+         <option>Corrida</option><option>Arcade</option><option>Outro</option>
+       </select>
+     </div>
+     <div>
+       <label>Tema / ambiente</label>
+       <input data-field="tema" placeholder="Floresta, espaço, cidade futurista...">
+     </div>
+     <div class="full">
+       <label>Resuma o jogo em uma frase</label>
+       <textarea data-field="resumo" maxlength="300" placeholder="Ex.: Um robô explora uma estação espacial para recuperar três baterias e voltar à nave."></textarea>
+       <div class="counter"><span data-count="resumo">0</span>/300</div>
+     </div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">3. Personagem</span>
+   <div class="grid" style="margin-top:14px">
+     <div><label>Nome do personagem</label><input data-field="personagem"></div>
+     <div><label>Quem ou o que ele é?</label><input data-field="tipo_personagem" placeholder="Explorador, robô, criatura..."></div>
+     <div><label>Habilidade principal</label><input data-field="habilidade" placeholder="Correr, abrir portas, usar dash..."></div>
+     <div><label>Limitação</label><input data-field="limitacao" placeholder="Ex.: não atravessa áreas com energia"></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">4. Objetivo e desafio</span>
+   <div class="grid" style="margin-top:14px">
+     <div class="full">
+       <label>O que o jogador precisa fazer para vencer?</label>
+       <textarea data-field="objetivo" maxlength="400"></textarea>
+       <div class="counter"><span data-count="objetivo">0</span>/400</div>
+     </div>
+     <div class="full">
+       <label>Qual será o principal desafio?</label>
+       <textarea data-field="desafio" maxlength="400" placeholder="Inimigos, labirintos, portas, tempo, obstáculos..."></textarea>
+       <div class="counter"><span data-count="desafio">0</span>/400</div>
+     </div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">5. Mecânicas</span>
+   <h2>O que o jogador poderá fazer?</h2>
+   <div class="options" data-field-group="mecanicas">
+     <label class="choice"><input type="checkbox" value="Mover">Mover</label>
+     <label class="choice"><input type="checkbox" value="Coletar itens">Coletar itens</label>
+     <label class="choice"><input type="checkbox" value="Abrir portas">Abrir portas</label>
+     <label class="choice"><input type="checkbox" value="Conversar">Conversar</label>
+     <label class="choice"><input type="checkbox" value="Desviar">Desviar</label>
+     <label class="choice"><input type="checkbox" value="Ativar mecanismos">Ativar mecanismos</label>
+   </div>
+   <h3>Outra mecânica</h3>
+   <input data-field="mecanica_extra" placeholder="Descreva uma mecânica diferente">
+ </section>
+
+ <section class="card">
+   <span class="badge">6. Elementos do jogo</span>
+   <div class="grid" style="margin-top:14px">
+     <div><label>Item importante</label><input data-field="item" placeholder="Chave, cristal, bateria..."></div>
+     <div><label>Obstáculo ou inimigo</label><input data-field="obstaculo"></div>
+     <div><label>Como o jogador recebe feedback?</label><input data-field="feedback" placeholder="Som, animação, mensagem, pontos..."></div>
+     <div><label>Como o jogador perde ou falha?</label><input data-field="derrota"></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">7. Estrutura da fase</span>
+   <h2>Planeje o caminho do jogador</h2>
+   <div class="grid">
+     <div><label>Começo</label><textarea data-field="inicio" placeholder="Onde o jogador começa?"></textarea></div>
+     <div><label>Meio</label><textarea data-field="meio" placeholder="Que desafio aparece?"></textarea></div>
+     <div><label>Final</label><textarea data-field="final" placeholder="Como chega ao objetivo?"></textarea></div>
+     <div><label>Condição de vitória</label><textarea data-field="vitoria"></textarea></div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">8. Escopo</span>
+   <h2>Seu jogo cabe no tempo do bimestre?</h2>
+   <div class="grid">
+     <div>
+       <label>Quantidade de fases</label>
+       <select data-field="fases"><option value="">Selecione...</option><option>1</option><option>2</option><option>3</option></select>
+     </div>
+     <div>
+       <label>Quantidade de tipos de inimigo</label>
+       <select data-field="inimigos"><option value="">Selecione...</option><option>0</option><option>1</option><option>2</option><option>3</option></select>
+     </div>
+     <div class="full">
+       <label>O que você pode retirar para simplificar o projeto?</label>
+       <textarea data-field="simplificar"></textarea>
+     </div>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">9. Revisão</span>
+   <h2>Checklist antes de desenvolver</h2>
+   <div class="options" data-field-group="checklist">
+     <label class="choice"><input type="checkbox" value="Objetivo claro">Objetivo claro</label>
+     <label class="choice"><input type="checkbox" value="Desafio definido">Desafio definido</label>
+     <label class="choice"><input type="checkbox" value="Personagem definido">Personagem definido</label>
+     <label class="choice"><input type="checkbox" value="Vitória definida">Vitória definida</label>
+     <label class="choice"><input type="checkbox" value="Escopo pequeno">Escopo pequeno</label>
+     <label class="choice"><input type="checkbox" value="Ideia explicável">Consigo explicar em 1 frase</label>
+   </div>
+ </section>
+
+ <section class="card">
+   <span class="badge">Resumo automático</span>
+   <h2>Visão geral do projeto</h2>
+   <div id="preview" class="preview">Preencha os campos acima para gerar o resumo.</div>
+ </section>
+
+ <div class="actions">
+   <button class="primary" onclick="saveLocal()">Salvar no navegador</button>
+   <button class="secondary" onclick="loadLocal()">Carregar salvo</button>
+   <button class="accent" onclick="exportJSON()">Exportar JSON</button>
+   <label class="filebtn">Importar JSON<input id="importFile" type="file" accept=".json,application/json"></label>
+   <button class="success" onclick="window.print()">Exportar / Imprimir PDF</button>
+   <button class="secondary" onclick="clearForm()">Limpar</button>
+ </div>
+
+ <p class="note screen-only">Para gerar PDF, clique em <strong>Exportar / Imprimir PDF</strong> e escolha “Salvar como PDF” na janela de impressão do navegador. O arquivo JSON permite continuar editando depois.</p>
+ <footer>JAMTEC • Planejamento de Jogo Digital</footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
